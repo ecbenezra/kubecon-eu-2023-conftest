@@ -36,12 +36,12 @@ warn_latest_tags[msg] {
     is_dev
     containerImage := input.spec.containers[_].image
     image_latest_tag(containerImage)
-    msg := sprintf("dev image is tagged latest %v/%v. Be aware latest tags are not permitted in stg or prd",[containerImage,input.kind,input.metadata.name])
+    msg := sprintf("dev image is tagged latest %v/%v. Be aware latest tags are not permitted in stg or prd",[input.kind,input.metadata.name])
 }
 
 warn_latest_tags[msg] {
     is_dev
     containerImage := input.spec.template.spec.containers[_].image
     image_latest_tag(containerImage)
-    msg := sprintf("dev image is tagged latest %v/%v. Be aware latest tags are not permitted in stg or prd",[containerImage,input.kind,input.metadata.name])
+    msg := sprintf("dev image is tagged latest %v/%v. Be aware latest tags are not permitted in stg or prd",[input.kind,input.metadata.name])
 }
