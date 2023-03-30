@@ -1,0 +1,21 @@
+kind: pipeline
+name: test-latest-tag
+
+trigger:
+  event: push
+
+steps:
+- name: use-a-latest-tag
+  image: busybox:latest
+  commands:
+   - ls
+
+- name: no-image-tag
+  image: busybox
+  commands:
+   - ls
+
+- name: okay-image
+  image: busybox:1.34.1
+  commands:
+   - ls

@@ -5,13 +5,8 @@ trigger:
   event: push
 
 steps:
-- name: use-a-latest-tag
-  image: busybox:latest
-  commands:
-   - ls
-
 - name: no-image-tag
-  image: busybox
+  image: busybox:1.34.1
   commands:
    - ls
 
@@ -19,3 +14,13 @@ steps:
   image: busybox:1.34.1
   commands:
    - ls
+---
+kind: pipeline
+name: another-working-pipeline
+
+trigger:
+  event: pull_request
+
+steps:
+- name: lint-helm-charts
+  image: quay.io/helmpack/chart-testing:v3.8.0
