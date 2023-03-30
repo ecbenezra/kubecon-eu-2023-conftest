@@ -15,4 +15,4 @@ jobs:
         uses: actions/checkout@v3
       - name: Validate Kubernetes policy
         run: |
-          conftest test -o github -p kubecon-examples/ example-configs/
+          conftest test -o github -p kubecon-examples/ example-configs/ --ignore "failing-*"
