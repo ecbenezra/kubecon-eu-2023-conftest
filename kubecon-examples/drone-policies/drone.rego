@@ -1,7 +1,10 @@
 package main
 
 import future.keywords
-import data.functions
+
+image_latest_tag(imageName) {
+	endswith(imageName, "latest")
+}
 
 deny_no_image_tag[msg] {
 	not every_image_contains_tag
@@ -10,7 +13,7 @@ deny_no_image_tag[msg] {
 
 deny_image_latest[msg] {
     image = input.steps[_].image
-    functions.image_latest_tag(image)
+    image_latest_tag(image)
     msg = sprintf("%v/%v contains images with latest tag: %v", [input.kind,input.name,image])
 }
 
