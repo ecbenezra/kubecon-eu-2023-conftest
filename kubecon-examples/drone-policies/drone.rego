@@ -11,7 +11,7 @@ deny_no_image_tag[msg] {
 deny_image_latest[msg] {
     image = input.steps[_].image
     functions.image_latest_tag(image)
-    msg = sprintf("%v/%v contains images with latest tag", [input.kind,input.name])
+    msg = sprintf("%v/%v contains images with latest tag: %v", [input.kind,input.name,image])
 }
 
 every_image_contains_tag {

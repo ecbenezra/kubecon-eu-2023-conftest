@@ -1,13 +1,11 @@
 package main
 
+import data.functions
+
 # Functions
 
 is_dev {
 	input.metadata.labels.env == "dev"
-}
-
-image_latest_tag(imageName) {
-	endswith(imageName, "latest")
 }
 
 # deny K8s objects without an environment label
@@ -21,7 +19,7 @@ deny_latest_tags[msg] {
 
 	# container image path for pods
 	containerImage := input.spec.containers[_].image
-	image_latest_tag(containerImage)
+	functions.image_latest_tag(containerImage)
 	msg := sprintf("image %v cannot be tagged latest %v/%v", [containerImage, input.kind, input.metadata.name])
 }
 
@@ -30,20 +28,20 @@ deny_latest_tags[msg] {
 
 	# container image path for deployments and replicasets
 	containerImage := input.spec.template.spec.containers[_].image
-	image_latest_tag(containerImage)
+	functions.image_latest_tag(containerImage)
 	msg := sprintf("image %v cannot be tagged latest %v/%v", [containerImage, input.kind, input.metadata.name])
 }
 
 warn_latest_tags[msg] {
 	is_dev
 	containerImage := input.spec.containers[_].image
-	image_latest_tag(containerImage)
+	functions.image_latest_tag(containerImage)
 	msg := sprintf("dev image is tagged latest %v/%v. Be aware latest tags are not permitted in stg or prd", [input.kind, input.metadata.name])
 }
 
 warn_latest_tags[msg] {
 	is_dev
 	containerImage := input.spec.template.spec.containers[_].image
-	image_latest_tag(containerImage)
+	functions.image_latest_tag(containerImage)
 	msg := sprintf("dev image is tagged latest %v/%v. Be aware latest tags are not permitted in stg or prd", [input.kind, input.metadata.name])
 }
