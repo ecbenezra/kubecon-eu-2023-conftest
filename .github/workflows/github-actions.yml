@@ -1,5 +1,5 @@
 ---
-name: Conftest
+name: Run Conftest
 
 on:
   pull_request:
@@ -13,6 +13,6 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v3
-      - name: Validate Kubernetes policy
+      - name: Validate Rego Policies
         run: |
           conftest test -o github -p kubecon-examples/ example-configs/ --ignore "failing-*"
