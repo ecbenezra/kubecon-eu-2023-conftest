@@ -1,3 +1,9 @@
+kind: secret
+name: my-secret
+get:
+  path: secrets/dev/docker
+  name: username
+---
 kind: pipeline
 name: test-latest-tag
 
