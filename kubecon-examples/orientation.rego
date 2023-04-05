@@ -4,12 +4,15 @@ import data.functions
 
 # Functions
 
+labelKinds := {"Deployment","ReplicaSet"}
+
 is_dev {
 	input.metadata.labels.env == "dev"
 }
 
 # deny K8s objects without an environment label
 deny_no_env_label[msg] {
+	labelKinds[input.kind]
 	not input.metadata.labels.env
 	msg := sprintf("%v/%v does not contain env label", [input.kind, input.metadata.name])
 }
