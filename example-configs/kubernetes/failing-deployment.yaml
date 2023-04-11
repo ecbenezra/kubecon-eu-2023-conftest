@@ -4,7 +4,7 @@ metadata:
   name: nginx-stg
   labels:
     app: nginx
-    env: stg
+    env: staging
 spec:
   template:
     spec:

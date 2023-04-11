@@ -2,9 +2,11 @@ package main
 
 import data.functions
 
-# Functions
+labelKinds := {"Deployment", "ReplicaSet", "Pod"}
 
-labelKinds := {"Deployment","ReplicaSet"}
+allowedEnvs := {"dev", "stg", "prd"}
+
+# Functions
 
 is_dev {
 	input.metadata.labels.env == "dev"
@@ -15,6 +17,12 @@ deny_no_env_label[msg] {
 	labelKinds[input.kind]
 	not input.metadata.labels.env
 	msg := sprintf("%v/%v does not contain env label", [input.kind, input.metadata.name])
+}
+
+deny_invalid_env_label[msg] {
+	labelKinds[input.kind]
+	not allowedEnvs[input.metadata.labels.env]
+	msg := sprintf("%v/%v metadata label must be equal to dev, stg, or prd", [input.kind, input.metadata.name])
 }
 
 deny_latest_tags[msg] {
