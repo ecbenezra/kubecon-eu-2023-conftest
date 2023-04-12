@@ -52,3 +52,30 @@ spec:
         image: nginx:1.3.2
         ports:
         - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vital-deployment-stg
+  labels:
+    app: nginx
+    env: stg
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vital-deployment
+  template:
+    metadata:
+      labels:
+        app: vital-deployment
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:latest
+        ports:
+        - containerPort: 80
+      - name: important-image
+        image: vital-image:latest
+        ports:
+        - containerPort: 80

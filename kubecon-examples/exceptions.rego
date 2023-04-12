@@ -1,9 +1,8 @@
 package main
 
-exception[rules] {
-	input.kind == "Deployment"
-	startswith(input.metadata.name, "very-important-latest")
-	reason = "some performance issues"
+allowedImages := {"busybox:latest", "vital-image:latest"}
 
+exception[rules] {
+	allowedImages[input.spec.template.spec.containers[_].image]
 	rules := ["latest_tags"]
 }
