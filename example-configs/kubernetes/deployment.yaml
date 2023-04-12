@@ -17,22 +17,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: very-important-latest-prd
-  labels:
-    app: nginx
-    env: prd
-spec:
-  template:
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: nginx-deployment
   labels:
     app: nginx
