@@ -18,11 +18,11 @@ This tests using a default policy directory named `policy`. If policies are in a
 
 ## Understanding and Writing Rego
 
-Rego syntax contains logic that isn't necessarily intuitive. Using the example of prohibiting latest tags on container images in higher environments (staging and production). 
+Rego syntax contains logic that isn't necessarily intuitive. The below examples help explain rego using the example of prohibiting latest tags on container images in higher environments (staging and production). These policies build on one another to validate compliance. 
 
-When writing conftest for rego, prefix the configuration path to what you want to test with the word `input`. When looking to require a certain metadata label on a Kubernetes deployment spec, for instance, the path would be `metadata.labels.label-name` and in a Conftest rule, this would be written `input.metadata.labels.label-name`. 
+When writing conftest for rego, prefix the configuration path to what you want to test with the word `input`. When looking to require a certain metadata label on a Kubernetes deployment spec, for instance, the path would be `metadata.labels.label-name` and in a Conftest rule, this would be written `input.metadata.labels.label-name`. This `input` refers to the input data that is provided to Conftest at runtime. 
 
-Take a look at the [prd deployment](example-configs/kubernetes/failing-deployment.yaml#29) and [dev deployment](example-configs/kubernetes/deployment.yaml#14). We will write policies that govern these deployments and the use of image tags, with the goal to:
+Take a look at the [prd deployment](example-configs/kubernetes/failing-deployment.yaml#L29) and [dev deployment](example-configs/kubernetes/deployment.yaml#L14). We will write policies that govern these deployments and the use of image tags, with the goal to:
 
 * enforce `metadata.labels.env` label to exist and be one of `{"dev", "stg", "prd"}`
 * ensure container images are not tagged `latest` in higher-level environments 
@@ -119,4 +119,4 @@ Upload your bundle to an OPA server using `opa run`; or upload to Git repo or OC
 
 ## Thanks
 
-Special thanks to g Link, Serhiy Martynenko, Luke Phillips, Max Knee, The New York Times Continuous Delivery Platform Team, and the members of The New York Times Delivery Engineering Mission. 
+Special thanks to Mike Hume, g Link, Serhiy Martynenko, Luke Phillips, Max Knee, The New York Times Continuous Delivery Platform Team, and the members of The New York Times Delivery Engineering Mission. 
