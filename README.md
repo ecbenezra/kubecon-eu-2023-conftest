@@ -119,4 +119,4 @@ Upload your bundle to an OPA server using `opa run`; or upload to Git repo or OC
 
 ## Thanks
 
-Special thanks to Mike Hume, g Link, Serhiy Martynenko, Luke Phillips, Max Knee, The New York Times Continuous Delivery Platform Team, and the members of The New York Times Delivery Engineering Mission. 
+Special thanks to Mike Hume, g Link, Serhiy Martynenko, Luke Philips, Max Knee, The New York Times Continuous Delivery Platform Team, and the members of The New York Times Delivery Engineering Mission. 
