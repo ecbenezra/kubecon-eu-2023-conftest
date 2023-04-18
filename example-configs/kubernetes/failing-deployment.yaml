@@ -1,3 +1,5 @@
+# Non-compliant deployments
+# metadata.labels.env is not one of {"dev", "stg", "prd"}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +16,7 @@ spec:
         ports:
         - containerPort: 80
 ---
+# Non-compliant deployment: image tagged latest for "prd" env
 apiVersion: v1
 kind: Pod
 metadata:
@@ -27,6 +30,7 @@ spec:
     ports:
     - containerPort: 80
 ---
+# Non-compliant deployment: no metadata.labels.env
 apiVersion: apps/v1
 kind: Deployment
 metadata:
